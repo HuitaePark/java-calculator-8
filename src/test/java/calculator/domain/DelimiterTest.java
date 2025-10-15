@@ -1,6 +1,7 @@
 package calculator.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,5 +29,15 @@ public class DelimiterTest {
         String[] numbers = delimiter.getTokens();
 
         assertThat(numbers).containsExactly("1", "2", "3");
+    }
+
+    @DisplayName("커스텀 구분자가 한 자가 아닐경우 에러가 발생한다.")
+    @Test
+    void customDelimiter_is_not_single() {
+        String input = "//;;\\n1;;2;;3";
+        assertThatThrownBy(() -> {
+            Delimiter delimiter = Delimiter.from(input);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

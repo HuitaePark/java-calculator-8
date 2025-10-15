@@ -1,5 +1,6 @@
 package calculator.domain;
 
+
 public class Delimiter {
     private final String basicDelimiter = "[:,]";
     private String customDelimiter = "";
@@ -12,6 +13,7 @@ public class Delimiter {
     }
 
     public static Delimiter from(String input) {
+        verifyCustomDelimiterIsSingle(input);
         return new Delimiter(input);
     }
 
@@ -38,7 +40,7 @@ public class Delimiter {
         return input.substring(2, input.indexOf("\\n"));
     }
 
-    private boolean hasCustomDelimiter(String input) {
+    private static boolean hasCustomDelimiter(String input) {
         return input.startsWith("//") && input.contains("\\n");
     }
 
@@ -46,4 +48,9 @@ public class Delimiter {
         return input.substring(5);
     }
 
+    private static void verifyCustomDelimiterIsSingle(String input) {
+        if (hasCustomDelimiter(input) && !input.matches("^//.\\\\n.*")) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

@@ -9,6 +9,10 @@ public class Calculator {
     }
 
     public static Calculator operation(String input) {
+        if (input == null || input.isEmpty()) {
+            return new Calculator(Operands.empty());
+        }
+
         Delimiter delimiter = Delimiter.from(input);
         Operands operands = Operands.from(delimiter.getTokens());
         return new Calculator(operands);

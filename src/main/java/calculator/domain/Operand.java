@@ -34,7 +34,7 @@ public class Operand {
     }
 
     private static void verifyInputIsPositive(String input) {
-        if (parseToInt(input) <= 0) {
+        if (parseToInt(input) < 0) {
             throw new IllegalArgumentException();
         }
     }

@@ -22,6 +22,10 @@ public class Operands {
         return new Operands(operandList);
     }
 
+    public static Operands empty() {
+        return new Operands(List.of(Operand.from("0")));
+    }
+
     public List<Operand> getOperands() {
         return unmodifiableList(operands);
     }

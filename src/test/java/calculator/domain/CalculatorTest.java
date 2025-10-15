@@ -18,4 +18,15 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(6);
     }
 
+    @DisplayName("공백 문자열이 들어올경우 0을 반환한다.")
+    @Test
+    void empty_string_return_zero() {
+        String input = "";
+        Calculator calculator = Calculator.operation(input);
+
+        int result = calculator.addition();
+
+        assertThat(result).isEqualTo(0);
+    }
+
 }

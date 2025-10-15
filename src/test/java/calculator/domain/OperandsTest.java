@@ -29,4 +29,14 @@ public class OperandsTest {
         })
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("피연산자는 양수만 가능하다.")
+    @Test
+    void Operand_is_only_positive() {
+        String[] inputNumbers = {"-1", "-2", "-3"};
+        assertThatThrownBy(() -> {
+            Operands operands = Operands.from(inputNumbers);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

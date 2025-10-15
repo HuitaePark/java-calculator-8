@@ -20,10 +20,17 @@ public class Operand {
 
     private static void validate(String input) {
         verifyInputIsNumber(input);
+        verifyInputIsPositive(input);
     }
 
     private static void verifyInputIsNumber(String input) {
         if (!input.matches("\\d+")) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void verifyInputIsPositive(String input) {
+        if (parseToInt(input) <= 0) {
             throw new IllegalArgumentException();
         }
     }

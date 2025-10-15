@@ -51,4 +51,14 @@ public class DelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("기본 구분자가 쉼표나 콜론이 아닐경우 에러가 발생한다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"1;2;3", "1.2.3", "1!2!3", "1@2@3"})
+    void basicDelimiter_validate(String input) {
+        assertThatThrownBy(() -> {
+            Delimiter delimiter = Delimiter.from(input);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

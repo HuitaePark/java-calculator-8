@@ -2,7 +2,7 @@ package calculator.domain;
 
 
 public class Delimiter {
-    private final String basicDelimiter = "[:,]";
+    private final String BASIC_DELIMITER = "[:,]";
     private String customDelimiter = "";
 
     private final String[] tokens;
@@ -20,6 +20,7 @@ public class Delimiter {
     private void validate(String input) {
         verifyCustomDelimiterIsSingle(input);
         verifyCustomDelimiterIsNumber(input);
+        verifyBasicDelimiter(input);
     }
 
     public String[] getTokens() {
@@ -31,7 +32,7 @@ public class Delimiter {
             input = removeCustomPart(input);
             return input.split(customDelimiter);
         }
-        return input.split(basicDelimiter);
+        return input.split(BASIC_DELIMITER);
     }
 
     private String determineCustomDelimiter(String input) {
@@ -61,6 +62,12 @@ public class Delimiter {
 
     private void verifyCustomDelimiterIsNumber(String input) {
         if (hasCustomDelimiter(input) && this.customDelimiter.matches("\\d+")) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void verifyBasicDelimiter(String input) {
+        if (!hasCustomDelimiter(input) && !input.matches(".*[,:].*")) {
             throw new IllegalArgumentException();
         }
     }

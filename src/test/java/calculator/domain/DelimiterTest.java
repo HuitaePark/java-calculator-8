@@ -14,7 +14,7 @@ public class DelimiterTest {
     void separate_With_Custom_Delimiter() {
         String input = "//;\\n1;2;3";
 
-        Delimiter delimiter = new Delimiter(input);
+        Delimiter delimiter = Delimiter.from(input);
         String[] numbers = delimiter.getTokens();
 
         assertThat(numbers).containsExactly("1", "2", "3");
@@ -24,7 +24,7 @@ public class DelimiterTest {
     @ParameterizedTest
     @ValueSource(strings = {"1:2:3", "1,2,3", "1:2,3", "1,2:3"})
     void separate_With_Basic_Delimiter(String input) {
-        Delimiter delimiter = new Delimiter(input);
+        Delimiter delimiter = Delimiter.from(input);
         String[] numbers = delimiter.getTokens();
 
         assertThat(numbers).containsExactly("1", "2", "3");

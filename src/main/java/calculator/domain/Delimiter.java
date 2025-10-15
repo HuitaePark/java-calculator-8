@@ -6,9 +6,13 @@ public class Delimiter {
 
     private final String[] tokens;
 
-    public Delimiter(String input) {
+    private Delimiter(String input) {
         this.customDelimiter = determineCustomDelimiter(input);
         this.tokens = separatedByDelimiter(input);
+    }
+
+    public static Delimiter from(String input) {
+        return new Delimiter(input);
     }
 
     public String[] getTokens() {

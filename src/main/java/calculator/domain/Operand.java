@@ -14,6 +14,10 @@ public class Operand {
         return new Operand(operand);
     }
 
+    public int getOperand() {
+        return operand;
+    }
+
     private static int parseToInt(String number) {
         return Integer.parseInt(number);
     }

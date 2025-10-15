@@ -21,6 +21,7 @@ public class Delimiter {
         verifyCustomDelimiterIsSingle(input);
         verifyCustomDelimiterIsNumber(input);
         verifyBasicDelimiter(input);
+        verifyCustomIsBasicDelimiter(input);
     }
 
     public String[] getTokens() {
@@ -72,4 +73,9 @@ public class Delimiter {
         }
     }
 
+    private void verifyCustomIsBasicDelimiter(String input) {
+        if (hasCustomDelimiter(input) && BASIC_DELIMITER.contains(customDelimiter)) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

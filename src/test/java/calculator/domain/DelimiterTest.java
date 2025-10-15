@@ -61,4 +61,14 @@ public class DelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("커스텀 구분자는 기본 구분자를 사용할수 없다.")
+    @Test
+    void CustomDelimiter_is_not_Basic_Delimiter() {
+        String input = "//:\\n1:2:3";
+        assertThatThrownBy(() -> {
+            Delimiter delimiter = Delimiter.from(input);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

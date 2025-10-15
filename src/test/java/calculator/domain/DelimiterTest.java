@@ -40,4 +40,15 @@ public class DelimiterTest {
         })
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("커스텀 구분자가 숫자일경우 에러가 발생한다.")
+    @Test
+    void customDelimiter_is_number() {
+        String input = "//9\\n19293";
+        assertThatThrownBy(() -> {
+            Delimiter delimiter = Delimiter.from(input);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

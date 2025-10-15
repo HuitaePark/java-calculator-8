@@ -17,7 +17,7 @@ public class Operands {
     public static Operands from(String[] inputNumbers) {
         List<Operand> operandList = new ArrayList<>();
 
-        Arrays.asList(inputNumbers).forEach(number -> operandList.add(new Operand(number)));
+        Arrays.asList(inputNumbers).forEach(number -> operandList.add(Operand.from(number)));
 
         return new Operands(operandList);
     }

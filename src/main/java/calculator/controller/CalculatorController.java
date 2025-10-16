@@ -21,11 +21,11 @@ public class CalculatorController {
     public void startCalculate() {
         showStartMessage();
         String input = receiveInput();
-        int result = calculate(input);
+        long result = calculate(input);
         showResultMessage(result);
     }
 
-    private int calculate(String input) {
+    private long calculate(String input) {
         return Calculator.operation(input).addition();
     }
 
@@ -37,7 +37,7 @@ public class CalculatorController {
         outputView.printStartMessage();
     }
 
-    private void showResultMessage(int result) {
+    private void showResultMessage(long result) {
         outputView.printResultMessage(result);
     }
 

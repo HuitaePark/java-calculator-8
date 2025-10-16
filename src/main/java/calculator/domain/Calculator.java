@@ -18,7 +18,7 @@ public class Calculator {
         return new Calculator(operands);
     }
 
-    public int addition() {
-        return operands.getOperands().stream().mapToInt(Operand::getOperand).sum();
+    public long addition() {
+        return operands.getOperands().stream().mapToLong(Operand::getOperand).sum();
     }
 }

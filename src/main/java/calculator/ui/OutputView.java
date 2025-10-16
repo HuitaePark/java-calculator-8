@@ -9,7 +9,7 @@ public class OutputView {
         System.out.println(START_MESSAGE);
     }
 
-    public void printResultMessage(int result) {
+    public void printResultMessage(long result) {
         System.out.printf(RESULT_MESSAGE, result);
     }
 }

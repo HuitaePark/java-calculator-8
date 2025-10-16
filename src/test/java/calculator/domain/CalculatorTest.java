@@ -13,7 +13,7 @@ public class CalculatorTest {
         String input = "//;\\n1;2;3";
         Calculator calculator = Calculator.operation(input);
 
-        int result = calculator.addition();
+        long result = calculator.addition();
 
         assertThat(result).isEqualTo(6);
     }
@@ -24,9 +24,19 @@ public class CalculatorTest {
         String input = "";
         Calculator calculator = Calculator.operation(input);
 
-        int result = calculator.addition();
+        long result = calculator.addition();
 
         assertThat(result).isEqualTo(0);
     }
 
+    @DisplayName("정수 최대값 합산 테스트")
+    @Test
+    void combine_max_element_by_calculator() {
+        String input = "//;\\n2147483647;2147483647;2147483647";
+        Calculator calculator = Calculator.operation(input);
+
+        long result = calculator.addition();
+
+        assertThat(result).isEqualTo(6442450941L);
+    }
 }

@@ -19,10 +19,14 @@ public class Delimiter {
     }
 
     private void validate(String input) {
+        if (!hasCustomDelimiter(input)) {
+            verifyBasicDelimiter(input);
+            return;
+        }
+
         verifyCustomDelimiterIsSingle(input);
-        verifyCustomDelimiterIsNumber(input);
-        verifyBasicDelimiter(input);
-        verifyCustomIsBasicDelimiter(input);
+        verifyCustomDelimiterIsNumber();
+        verifyCustomIsBasicDelimiter();
     }
 
     public String[] getTokens() {
@@ -59,25 +63,25 @@ public class Delimiter {
     }
 
     private void verifyCustomDelimiterIsSingle(String input) {
-        if (hasCustomDelimiter(input) && !input.matches(DelimiterConstant.FIND_SINGLE_CUSTOM_DELIMITER_REGEX)) {
+        if (!input.matches(DelimiterConstant.FIND_SINGLE_CUSTOM_DELIMITER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void verifyCustomDelimiterIsNumber(String input) {
-        if (hasCustomDelimiter(input) && this.customDelimiter.matches(DelimiterConstant.FIND_NUMBER_REGEX)) {
+    private void verifyCustomDelimiterIsNumber() {
+        if (this.customDelimiter.matches(DelimiterConstant.FIND_NUMBER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void verifyBasicDelimiter(String input) {
-        if (!hasCustomDelimiter(input) && !input.matches(DelimiterConstant.FIND_BASIC_DELIMITER_REGEX)) {
+        if (!input.matches(DelimiterConstant.FIND_BASIC_DELIMITER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void verifyCustomIsBasicDelimiter(String input) {
-        if (hasCustomDelimiter(input) && DelimiterConstant.BASIC_DELIMITER_SYMBOLS.contains(customDelimiter)) {
+    private void verifyCustomIsBasicDelimiter() {
+        if (DelimiterConstant.BASIC_DELIMITER_SYMBOLS.contains(customDelimiter)) {
             throw new IllegalArgumentException();
         }
     }

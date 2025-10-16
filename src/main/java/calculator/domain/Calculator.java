@@ -10,7 +10,7 @@ public class Calculator {
 
     public static Calculator operation(String input) {
         if (input == null || input.isEmpty()) {
-            return new Calculator(Operands.empty());
+            return new Calculator(Operands.defaultValue());
         }
 
         Delimiter delimiter = Delimiter.from(input);

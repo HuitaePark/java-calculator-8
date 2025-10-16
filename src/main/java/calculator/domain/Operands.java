@@ -17,7 +17,7 @@ public class Operands {
         return new Operands(createOperandList(inputNumbers));
     }
 
-    public static Operands empty() {
+    public static Operands defaultValue() {
         return new Operands(List.of(createOperand("0")));
     }
 

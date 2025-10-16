@@ -71,4 +71,39 @@ public class DelimiterTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("공백인 커스텀 구분자 테스트")
+    @Test
+    void CustomDelimiter_is_whiteSpace() {
+        String input = "// \\n1 2 3";
+
+        Delimiter delimiter = Delimiter.from(input);
+        String[] numbers = delimiter.getTokens();
+
+        assertThat(numbers).containsExactly("1", "2", "3");
+    }
+
+    @DisplayName("정규식 특수문자 커스텀 구분자 테스트")
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {
+            "//[\\n1[2[3",     // 대괄호
+            "//.\\n1.2.3",     // 마침표
+            "//*\\n1*2*3",     // 별
+            "//+\\n1+2+3",     // 플러스
+            "//?\\n1?2?3",     // 물음표
+            "//|\\n1|2|3",     // 파이프
+            "//^\\n1^2^3",     // 캐럿
+            "//$\\n1$2$3",     // 달러
+            "//(\\n1(2(3",     // 여는 괄호
+            "//)\\n1)2)3",     // 닫는 괄호
+            "//{\\n1{2{3",     // 중괄호
+            "//\\\\n1\\2\\3" // 역슬래시
+    })
+    void customDelimiter_withRegexSpecialCharacters_shouldSplitCorrectly(String input) {
+        Delimiter delimiter = Delimiter.from(input);
+        String[] numbers = delimiter.getTokens();
+
+        assertThat(numbers).containsExactly("1", "2", "3");
+    }
+
+
 }

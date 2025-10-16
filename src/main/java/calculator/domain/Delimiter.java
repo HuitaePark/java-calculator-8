@@ -1,8 +1,13 @@
 package calculator.domain;
 
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 public class Delimiter {
-    private final String BASIC_DELIMITER = "[:,]";
+    private static final String BASIC_DELIMITER = "[:,]";
+    private static final List<String> BASIC_DELIMITER_SYMBOLS = List.of(",", ":");
+
     private String customDelimiter = "";
 
     private final String[] tokens;
@@ -31,7 +36,7 @@ public class Delimiter {
     private String[] separatedByDelimiter(String input) {
         if (!customDelimiter.isEmpty()) {
             input = removeCustomPart(input);
-            return input.split(customDelimiter);
+            return input.split(Pattern.quote(customDelimiter));
         }
         return input.split(BASIC_DELIMITER);
     }
@@ -74,7 +79,7 @@ public class Delimiter {
     }
 
     private void verifyCustomIsBasicDelimiter(String input) {
-        if (hasCustomDelimiter(input) && BASIC_DELIMITER.contains(customDelimiter)) {
+        if (hasCustomDelimiter(input) && BASIC_DELIMITER_SYMBOLS.contains(customDelimiter)) {
             throw new IllegalArgumentException();
         }
     }

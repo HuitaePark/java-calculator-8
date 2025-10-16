@@ -22,3 +22,13 @@
 - [x] 사용자의 문자열을 입력받는다
 - [x] 덧셈 결과를 출력한다.
 - [x] 잘못된 결과가 나올경우 IllegalArgumentException이 발생된다.
+
+### 프로그래밍 요구 사항
+
+- [x] JDK 21 버전을 사용한다.
+- [x] Application main() 에서 프로그래밍을 시작한다.
+- [x] build.gradle을 변경하지 않는다.
+- [x] System.exit()를 호출하지 않는다.
+- [x] 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+- [x] Java Style Guide를 지키며 프로그래밍 한다.
+- [x] 명시하지 않은 파일이나 패키지를 바꾸거나 이동하지 않는다.

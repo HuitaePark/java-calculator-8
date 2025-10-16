@@ -105,5 +105,17 @@ public class DelimiterTest {
         assertThat(numbers).containsExactly("1", "2", "3");
     }
 
+    @DisplayName("커스텀 구분자가 일반적인 문자일때의 테스트")
+    @ParameterizedTest(name = "입력값: {0}")
+    @ValueSource(strings = {
+            "//a\\n1a2a3",     //소문자 영어
+            "//A\\n1A2A3",     // 대문자 영어
+            "//ㅅ\\n1ㅅ2ㅅ3",     // 한글
+    })
+    void customDelimiter_is_normalLetter(String input) {
+        Delimiter delimiter = Delimiter.from(input);
+        String[] numbers = delimiter.getTokens();
 
+        assertThat(numbers).containsExactly("1", "2", "3");
+    }
 }

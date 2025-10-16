@@ -1,15 +1,11 @@
 package calculator.domain;
 
 
-import java.util.List;
+import calculator.domain.constant.DelimiterConstant;
 import java.util.regex.Pattern;
 
 public class Delimiter {
-    private static final String BASIC_DELIMITER = "[:,]";
-    private static final List<String> BASIC_DELIMITER_SYMBOLS = List.of(",", ":");
-
-    private String customDelimiter = "";
-
+    private final String customDelimiter;
     private final String[] tokens;
 
     private Delimiter(String input) {
@@ -35,10 +31,10 @@ public class Delimiter {
 
     private String[] separatedByDelimiter(String input) {
         if (!customDelimiter.isEmpty()) {
-            input = removeCustomPart(input);
+            input = removeCustomDelimiterExpression(input);
             return input.split(Pattern.quote(customDelimiter));
         }
-        return input.split(BASIC_DELIMITER);
+        return input.split(DelimiterConstant.BASIC_DELIMITER_REGEX);
     }
 
     private String determineCustomDelimiter(String input) {
@@ -49,37 +45,39 @@ public class Delimiter {
     }
 
     private String extractCustomDelimiter(String input) {
-        return input.substring(2, input.indexOf("\\n"));
+        return input.substring(DelimiterConstant.CUSTOM_DELIMITER_INDEX,
+                input.indexOf(DelimiterConstant.SEPARATION_END_EXPRESSION));
     }
 
     private boolean hasCustomDelimiter(String input) {
-        return input.startsWith("//") && input.contains("\\n");
+        return input.startsWith(DelimiterConstant.SEPARATION_BEGIN_EXPRESSION) && input.contains(
+                DelimiterConstant.SEPARATION_END_EXPRESSION);
     }
 
-    private String removeCustomPart(String input) {
-        return input.substring(5);
+    private String removeCustomDelimiterExpression(String input) {
+        return input.substring(DelimiterConstant.CUSTOM_DELIMITER_EXPRESSION_INDEX);
     }
 
     private void verifyCustomDelimiterIsSingle(String input) {
-        if (hasCustomDelimiter(input) && !input.matches("^//.\\\\n.*")) {
+        if (hasCustomDelimiter(input) && !input.matches(DelimiterConstant.FIND_SINGLE_CUSTOM_DELIMITER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void verifyCustomDelimiterIsNumber(String input) {
-        if (hasCustomDelimiter(input) && this.customDelimiter.matches("\\d+")) {
+        if (hasCustomDelimiter(input) && this.customDelimiter.matches(DelimiterConstant.FIND_NUMBER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void verifyBasicDelimiter(String input) {
-        if (!hasCustomDelimiter(input) && !input.matches(".*[,:].*")) {
+        if (!hasCustomDelimiter(input) && !input.matches(DelimiterConstant.FIND_BASIC_DELIMITER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void verifyCustomIsBasicDelimiter(String input) {
-        if (hasCustomDelimiter(input) && BASIC_DELIMITER_SYMBOLS.contains(customDelimiter)) {
+        if (hasCustomDelimiter(input) && DelimiterConstant.BASIC_DELIMITER_SYMBOLS.contains(customDelimiter)) {
             throw new IllegalArgumentException();
         }
     }

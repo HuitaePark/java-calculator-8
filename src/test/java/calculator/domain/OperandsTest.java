@@ -39,4 +39,34 @@ public class OperandsTest {
         })
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("Integer 최댓값 생성 테스트")
+    @Test
+    void make_Operand_maxValue() {
+        String[] inputNumbers = {"2147483647", "2147483647", "2147483647"};
+        Operands operands = Operands.from(inputNumbers);
+
+        assertThat(operands.getOperands()).isInstanceOf(List.class)
+                .allSatisfy(operand -> assertThat(operand).isInstanceOf(Operand.class));
+    }
+
+    @DisplayName("정규식 문자 테스트")
+    @Test
+    void make_Operand_regex() {
+        String[] inputNumbers = {"\\", "\\", "\\"};
+        assertThatThrownBy(() -> {
+            Operands operands = Operands.from(inputNumbers);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("operand를 null로 만드는 테스트")
+    @Test
+    void make_Operand_null() {
+        String[] inputNumbers = {null, null, null};
+        assertThatThrownBy(() -> {
+            Operands operands = Operands.from(inputNumbers);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

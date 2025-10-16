@@ -30,7 +30,7 @@ public class Operand {
     }
 
     private static void verifyInputIsNumber(String input) {
-        if (!input.matches(DelimiterConstant.FIND_NUMBER_REGEX)) {
+        if (input == null || !input.matches(DelimiterConstant.FIND_NUMBER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }

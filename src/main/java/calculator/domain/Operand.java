@@ -1,5 +1,7 @@
 package calculator.domain;
 
+import calculator.domain.constant.DelimiterConstant;
+
 public class Operand {
 
     private final int operand;
@@ -28,7 +30,7 @@ public class Operand {
     }
 
     private static void verifyInputIsNumber(String input) {
-        if (!input.matches("\\d+")) {
+        if (!input.matches(DelimiterConstant.FIND_NUMBER_REGEX)) {
             throw new IllegalArgumentException();
         }
     }

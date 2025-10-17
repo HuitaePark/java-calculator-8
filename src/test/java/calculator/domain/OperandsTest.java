@@ -69,4 +69,15 @@ public class OperandsTest {
         })
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("operand를 소수로 만드는 테스트")
+    @Test
+    void make_Operand_Decimal() {
+        String[] inputNumbers = {"2.1", "2.1", "2.1"};
+        assertThatThrownBy(() -> {
+            Operands operands = Operands.from(inputNumbers);
+        })
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
